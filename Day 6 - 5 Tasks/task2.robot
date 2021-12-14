@@ -32,23 +32,24 @@ Check Account
     click element   ${demo_balance}
     reload page
 
-Clear Input
-    [arguments]     ${text_field}
-    wait until page contains element     ${text_field}    5
-    ${current_value}    GET ELEMENT ATTRIBUTE   ${text_field}   value
-    ${value_length}     Get Length  ${current_value}
-    Repeat Keyword  ${value_length}     Press Keys  ${text_field}   DELETE
-
-Buy Contract
+Select Contract
+    set selenium implicit wait  3
     wait until page does not contain element    dt_core_header_acc-info-preloader   20
     wait until page does not contain element     //*[@class="chart-container__loader"]   20
     wait until page contains element    //*[@class="cq-symbol-select-btn"]     20
     click element       //*[@class="cq-symbol-select-btn"]
-    set selenium implicit wait  2
-    click element   //*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[2]
+    set selenium implicit wait  3
+    wait until page contains element    //*[text()="Synthetic Indices"]
+    click element   //*[text()="Synthetic Indices"]
     wait until page contains element    //*[text()="Volatility 10 (1s) Index"]  20
     click element   //*[text()="Volatility 10 (1s) Index"]
 
+Clear Input
+    [arguments]     ${text_field}
+    wait until page contains element     ${text_field}    20
+    ${current_value}=   GET VALUE   ${text_field}
+    ${value_length}=    Get Length  ${current_value}
+    Repeat Keyword  ${value_length} times   PRESS KEYS  ${text_field}   BACKSPACE
 
 Set Values
     wait until page contains element    //*[@id="dt_contract_dropdown"]/div[1]  20
@@ -57,8 +58,8 @@ Set Values
     click element   //*[@id="dc_t_toggle_item"]
     wait until page contains element    //*[@data-value="5"]  20
 #    click element   //*[@data-value="5"]
-#    Clear Input     //*[@id="dt_amount_input"]
-#    input text  //*[@id="dt_amount_input"]  10
+    Clear Input     //*[@id="dt_amount_input"]
+    input text  //*[@id="dt_amount_input"]  10
 
 Buy Contract
     set selenium implicit wait  3
@@ -74,8 +75,8 @@ Deriv Login
 Check Account
     Check Account
 
-Buy Contract
-    Buy Contract
+Select Contract
+    Select Contract
 
 Setting Values
     Set Values
