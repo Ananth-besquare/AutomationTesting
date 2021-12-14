@@ -1,0 +1,3 @@
+*** Settings ***
+
+# EMPTY FILE
